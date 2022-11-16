@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRIS.Api", "HRIS.Api\HRIS.Api.csproj", "{96A50E02-65E8-4D76-AC61-777C5C36602A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRIS.Api.Test", "HRIS.Api.Test\HRIS.Api.Test.csproj", "{1DEE7780-3587-4C2C-83B6-92F09F4382D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96A50E02-65E8-4D76-AC61-777C5C36602A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96A50E02-65E8-4D76-AC61-777C5C36602A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A50E02-65E8-4D76-AC61-777C5C36602A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96A50E02-65E8-4D76-AC61-777C5C36602A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DEE7780-3587-4C2C-83B6-92F09F4382D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DEE7780-3587-4C2C-83B6-92F09F4382D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DEE7780-3587-4C2C-83B6-92F09F4382D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DEE7780-3587-4C2C-83B6-92F09F4382D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55E8F3DB-6A9A-4DEE-9F2C-403C374B0D33}
+	EndGlobalSection
+EndGlobal

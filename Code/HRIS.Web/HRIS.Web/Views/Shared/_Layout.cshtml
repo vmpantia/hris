@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRIS - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="cstm-navbar">
+        <div>
+            <img class="logo" src="~/Images/hrislogo.png" />
+        </div>
+        <div>
+
+        </div>
+    </div>
+    <div class="cstm-sidebar">
+        <div>
+            <ul>
+                <li>
+                    <div class="cstm-menu-button">
+                        <div class="text">
+                            Menu
+                        </div>
+                        <a href="@Url.Action("","Dashboard")">
+                            <div class="icon">
+                                <label class="fas fa-bars"></label>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a class="cstm-side-button" href="@Url.Action("","Dashboard")">
+                        <div class="icon">
+                            <label class="fas fa-chart-line"></label>
+                        </div>
+                        <label class="text">Dashboard</label>
+                    </a>
+                </li>
+                <li>
+                    <a class="cstm-side-button" href="@Url.Action("","Employee")">
+                        <div class="icon">
+                            <label class="fas fa-users"></label>
+                        </div>
+                        <label class="text">Employee</label>
+                    </a>
+                </li>
+                <li>
+                    <a class="cstm-side-button" href="@Url.Action("","Employee")">
+                        <div class="icon">
+                            <label class="fas fa-cogs"></label>
+                        </div>
+                        <label class="text">Settings</label>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+
+        </div>
+    </div>
+    <div class="cstm-main">
+            
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/FontAwesome")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

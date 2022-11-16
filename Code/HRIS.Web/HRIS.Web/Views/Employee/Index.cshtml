@@ -1,0 +1,81 @@
+﻿@model List<HRIS.Model.Employee>
+
+@{
+    ViewBag.Title = "Employee";
+}
+
+<div class="cstm-header">
+    <div class="icon">
+        <label class="fas fa-users"></label>
+    </div>
+    <label class="title">Employee</label>
+</div>
+
+<div class="cstm-body">
+    <div class="cstm-data-maintenance">
+            <a class="btn btn-primary">
+                <label class="fas fa-user-edit"></label>
+                &nbsp;New
+            </a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Created Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model == null || Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="7">
+                        <div class="cstm-no-data">
+                            No Data Available
+                        </div>
+                    </td> 
+                </tr>
+                return;
+            }
+            
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="cstm-action-buttons">
+                            <a class="btn btn-warning" href="@Url.Action("EditEmployee","Employee", new {internalId=employee.InternalID})">
+                                <label class="fas fa-user-edit"></label>
+                                &nbsp;Edit
+                            </a>
+                        </div>  
+                    </td>
+                    <td>@employee.EmployeeID</td>
+                    <td>@employee.Name</td>
+                    <td></td>
+                    <td></td>
+                    <td>@employee.CreatedDate.ToShortDateString()</td>
+                    <td>
+                        @switch (employee.Status)
+                        {
+                            case 1:
+                                <label class="cstm-status red"> @employee.StatusValue </label>
+                                break;
+                            case 2:
+                                <label class="cstm-status black"> @employee.StatusValue </label>
+                                break;
+                            default:
+                                <label class="cstm-status green"> @employee.StatusValue </label>
+                                break;
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

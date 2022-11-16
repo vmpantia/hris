@@ -1,0 +1,337 @@
+﻿@using HRIS.Model
+@model Employee
+
+@{
+    ViewBag.Title = "Edit Employee";
+}
+
+<div class="cstm-header">
+    <div class="icon">
+        <label class="fas fa-user-edit"></label>
+    </div>
+    <label class="title">Edit Employee</label>
+</div>
+
+@using(Html.BeginForm("EditEmployee", "Employee", FormMethod.Post))
+{
+    <div class="cstm-body">
+        <table class="cstm-table-fill-up-form">
+            <tr>
+                <td colspan="6">
+                    <div class="fill-up-info">
+                        <i class="fas fa-user"></i>
+                        &nbsp;
+                        Personal Information
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.FirstName)
+                        @Html.EditorFor(Model => Model.FirstName, new { htmlAttributes = new { placeholder = "First Name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.LastName)
+                        @Html.EditorFor(Model => Model.LastName, new { htmlAttributes = new { placeholder = "Last Name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.MiddleName)
+                        @Html.EditorFor(Model => Model.MiddleName, new { htmlAttributes = new { placeholder = "Middle Name", @class = "form-control" } })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.Suffix)
+                        @Html.EditorFor(Model => Model.Suffix, new { htmlAttributes = new { placeholder = "Suffix", @class = "form-control" } })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.Gender)
+                        @Html.DropDownListFor(Model => Model.Gender,
+                                              new SelectList(Enum.GetValues(typeof(Gender))),
+                                              new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.Birthdate)
+                        @Html.EditorFor(Model => Model.Birthdate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.PlaceOfBirth)
+                        @Html.EditorFor(Model => Model.PlaceOfBirth, new { htmlAttributes = new { placeholder = "Place of Birth", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PlaceOfBirth, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.Nationality)
+                        @Html.EditorFor(Model => Model.Nationality, new { htmlAttributes = new { placeholder = "Nationality", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.Religion)
+                        @Html.EditorFor(Model => Model.Religion, new { htmlAttributes = new { placeholder = "Religion", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.CivilStatus)
+                        @Html.DropDownListFor(Model => Model.CivilStatus,
+                                              new SelectList(Enum.GetValues(typeof(CivilStatus))),
+                                              new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CivilStatus, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="fill-up-info">
+                        <i class="fas fa-paper-plane"></i>
+                        &nbsp;
+                        Contact List
+                    </div>
+                </td>
+                <td colspan="3">
+                    <div class="fill-up-info">
+                        <i class="fas fa-street-view"></i>
+                        &nbsp;
+                        Address List
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Value</th>
+                                <th>Type</th>
+                                <th>Primary Flag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ContactList == null || Model.ContactList.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="cstm-no-data">
+                                            No Data Available
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var contact in Model.ContactList)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="cstm-action-buttons">
+                                                <a class="btn btn-warning" href="@Url.Action("EditEmployee","Employee", new {internalId=contact.InternalID})">
+                                                    <label class="fas fa-user-edit"></label>
+                                                    &nbsp;Edit
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>@contact.Value</td>
+                                        <td>@contact.Type</td>
+                                        <td>@contact.PrimaryFlag</td>
+                                    </tr>
+                                }
+                            }
+                            <tr>
+                                <td colspan="4">
+                                    <div class="form-group">
+                                        <div style="float:right;">
+                                            <input type="submit" value="New Contact" class="btn btn-default" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td colspan="3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Address</th>
+                                <th>Primary Flag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ContactList == null || Model.ContactList.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="cstm-no-data">
+                                            No Data Available
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var contact in Model.ContactList)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="cstm-action-buttons">
+                                                <a class="btn btn-warning" href="@Url.Action("EditEmployee","Employee", new {internalId=contact.InternalID})">
+                                                    <label class="fas fa-user-edit"></label>
+                                                    &nbsp;Edit
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>@contact.Value</td>
+                                        <td>@contact.Type</td>
+                                        <td>@contact.PrimaryFlag</td>
+                                    </tr>
+                                }
+                            }
+                            <tr>
+                                <td colspan="3">
+                                    <div class="form-group">
+                                        <div style="float:right;">
+                                            <input type="submit" value="New Address" class="btn btn-default" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <div class="fill-up-info">
+                        <i class="fas fa-female"></i>
+                        &nbsp;
+                        Mother's Information
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.M_FirstName)
+                        @Html.EditorFor(Model => Model.M_FirstName, new { htmlAttributes = new { placeholder = "First Name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.M_FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.M_LastName)
+                        @Html.EditorFor(Model => Model.M_LastName, new { htmlAttributes = new { placeholder = "Last Name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.M_LastName, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.M_MiddleName)
+                        @Html.EditorFor(Model => Model.M_MiddleName, new { htmlAttributes = new { placeholder = "Middle Name", @class = "form-control" } })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.M_Suffix)
+                        @Html.EditorFor(Model => Model.M_Suffix, new { htmlAttributes = new { placeholder = "Suffix", @class = "form-control" } })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.M_BirthDate)
+                        @Html.EditorFor(Model => Model.M_BirthDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.M_BirthDate, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.M_ContactNo)
+                        @Html.EditorFor(Model => Model.M_ContactNo, new { htmlAttributes = new { placeholder = "Contact No.", @class = "form-control" } })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <div class="fill-up-info">
+                        <i class="fas fa-male"></i>
+                        &nbsp;
+                        Father's Information
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.F_FirstName)
+                        @Html.EditorFor(Model => Model.F_FirstName, new { htmlAttributes = new { placeholder = "First Name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.F_FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.F_LastName)
+                        @Html.EditorFor(Model => Model.F_LastName, new { htmlAttributes = new { placeholder = "Last Name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.F_LastName, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.F_MiddleName)
+                        @Html.EditorFor(Model => Model.F_MiddleName, new { htmlAttributes = new { placeholder = "Middle Name", @class = "form-control" } })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.F_Suffix)
+                        @Html.EditorFor(Model => Model.F_Suffix, new { htmlAttributes = new { placeholder = "Suffix", @class = "form-control" } })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.F_BirthDate)
+                        @Html.EditorFor(Model => Model.F_BirthDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.F_BirthDate, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.F_ContactNo)
+                        @Html.EditorFor(Model => Model.F_ContactNo, new { htmlAttributes = new { placeholder = "Contact No.", @class = "form-control" } })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <div class="form-group">
+                        <div style="float:right;">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <input type="reset" value="Reset" class="btn btn-warning" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+}
